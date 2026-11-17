@@ -216,7 +216,7 @@
 
           <!-- Fitur Upload / Ganti Foto Profil Langsung -->
           <div class="mt-6 flex flex-col items-center gap-1.5">
-            <label for="uploadPhoto" class="cursor-pointer px-4 py-2 rounded-full glass-panel border border-cyan-400/40 hover:bg-cyan-500/20 text-xs font-bold text-cyan-300 flex items-center gap-2 transition">
+            <label for="https://github.com/cahyadiambon73-crypto/CAHYADI/blob/main/WhatsApp%20Image%202026-11-17%20at%2008.02.30.jpeg?raw=true" class="cursor-pointer px-4 py-2 rounded-full glass-panel border border-cyan-400/40 hover:bg-cyan-500/20 text-xs font-bold text-cyan-300 flex items-center gap-2 transition">
               <i class="fa-solid fa-camera-rotate"></i> Upload / Ganti Foto Profil
             </label>
             <input type="file" id="uploadPhoto" accept="image/*" class="hidden" />
