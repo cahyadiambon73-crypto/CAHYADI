@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cahyadi | Portofolio Teknik Komputer & Jaringan (TKJ)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          animation: {
+            'blob': 'blob 9s infinite',
+            'float': 'float 5s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+            'spin-slow': 'spin 14s linear infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(40px, -50px) scale(1.15)' },
+              '66%': { transform: 'translate(-30px, 30px) scale(0.9)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-14px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: 0.75, transform: 'scale(1)' },
+              '50%': { opacity: 1, transform: 'scale(1.04)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #050814;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+    .glass-panel {
+      background: rgba(15, 23, 46, 0.68);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+    }
+    .card-interactive {
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .card-interactive:hover {
+      transform: translateY(-7px);
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 22px 45px -15px rgba(139, 92, 246, 0.35);
+    }
+    .text-rainbow {
+      background: linear-gradient(120deg, #22d3ee, #818cf8, #e879f9, #fb7185, #fbbf24);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 5s linear infinite;
+    }
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+    .ring-rainbow {
+      background: conic-gradient(from 0deg, #06b6d4, #8b5cf6, #ec4899, #f59e0b, #10b981, #06b6d4);
+    }
+    .cyber-grid {
+      background-size: 44px 44px;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="cyber-grid relative selection:bg-fuchsia-500 selection:text-white">
+
+  <!-- Background Interaktif Partikel Jaringan -->
+  <canvas id="networkCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-55"></canvas>
+
+  <!-- Cahaya Warna-Warni Ambient -->
+  <div class="fixed -top-24 -left-24 w-96 h-96 bg-cyan-500/25 rounded-full mix-blend-screen filter blur-3xl animate-blob pointer-events-none z-0"></div>
+  <div class="fixed top-1/3 -right-24 w-96 h-96 bg-fuchsia-600/25 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-2000 pointer-events-none z-0"></div>
+  <div class="fixed -bottom-24 left-1/4 w-96 h-96 bg-amber-500/15 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-4000 pointer-events-none z-0"></div>
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between">
+      <a href="#beranda" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl ring-rainbow p-[2px] shadow-lg shadow-cyan-500/20">
+          <div class="w-full h-full bg-[#070c1d] rounded-[10px] flex items-center justify-center font-display font-black text-lg text-cyan-400 group-hover:scale-105 transition">
+            C
+          </div>
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-xl tracking-tight text-white">Cahyadi<span class="text-fuchsia-400">.TKJ</span></span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-300">
+        <a href="#beranda" class="hover:text-cyan-400 transition">Beranda</a>
+        <a href="#tentang-tkj" class="hover:text-purple-400 transition">Tentang TKJ</a>
+        <a href="#pekerjaan-tkj" class="hover:text-pink-400 transition">Pekerjaan TKJ</a>
+        <a href="#profil-sosmed" class="hover:text-amber-400 transition">Profil & Sosmed</a>
+      </nav>
+
+      <a href="#profil-sosmed" class="px-4 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 hover:brightness-110 transition shadow-lg shadow-pink-500/25">
+        Hubungi Cahyadi
+      </a>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+
+    <!-- 1. LANDING PAGE / HERO SECTION -->
+    <section id="beranda" class="max-w-6xl mx-auto px-5 pt-12 pb-20 md:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Kolom Teks Kiri -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel border border-cyan-400/40 text-cyan-300 text-xs sm:text-sm font-bold shadow-md">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            Portofolio Resmi • Teknik Komputer & Jaringan (TKJ)
+          </div>
+
+          <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.15]">
+            Selamat Datang, Saya <br />
+            <span class="text-rainbow">Cahyadi</span> 🚀
+          </h1>
+
+          <div class="text-lg sm:text-xl font-bold text-slate-100 h-8">
+            <span class="text-fuchsia-400">&gt;_ </span><span id="typingText"></span><span class="animate-pulse text-cyan-400">|</span>
+          </div>
+
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            Halo! Saya <strong class="text-white">Cahyadi</strong>, seorang pegiat dan antusias di bidang <strong class="text-cyan-300">Teknik Komputer dan Jaringan (TKJ)</strong>. Saya menyukai dunia perakitan komputer, arsitektur jaringan internet, administrasi server Linux, konfigurasi MikroTik, serta keamanan siber modern.
+          </p>
+
+          <!-- Tombol CTA -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#pekerjaan-tkj" class="px-6 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:brightness-110 shadow-lg shadow-cyan-500/30 transition flex items-center gap-2">
+              <i class="fa-solid fa-rocket"></i> Lihat Karier Lulusan TKJ
+            </a>
+            <a href="#profil-sosmed" class="px-6 py-3.5 rounded-xl font-bold text-white glass-panel hover:bg-white/10 border border-fuchsia-400/40 transition flex items-center gap-2">
+              <i class="fa-solid fa-address-card text-fuchsia-400"></i> Sosial Media & Kontak
+            </a>
+          </div>
+
+          <!-- Baris Ikon Sosmed Cepat -->
+          <div class="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+            <a href="https://www.instagram.com/__cahyadi_?igsi=MTZtNjcwbnRjd3l6cQ==" target="_blank" rel="noopener noreferrer" title="Instagram Cahyadi"
+               class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-pink-400 hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-500 hover:to-purple-600 hover:text-white transition transform hover:-translate-y-1">
+              <i class="fa-brands fa-instagram text-xl"></i>
+            </a>
+            <a href="https://www.tiktok.com/@bonreign_?_r=1&_t=ZS-99HAkJ3gCFr" target="_blank" rel="noopener noreferrer" title="TikTok Cahyadi"
+               class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-cyan-300 hover:bg-black hover:text-white hover:border-cyan-400 transition transform hover:-translate-y-1">
+              <i class="fa-brands fa-tiktok text-lg"></i>
+            </a>
+            <a href="https://youtube.com/@cahyadi-n7z?si=lYSiEZ0knD2AKHR8" target="_blank" rel="noopener noreferrer" title="YouTube Cahyadi"
+               class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-red-500 hover:bg-red-600 hover:text-white transition transform hover:-translate-y-1">
+              <i class="fa-brands fa-youtube text-xl"></i>
+            </a>
+            <a href="https://www.facebook.com/share/1FctgL7zww/" target="_blank" rel="noopener noreferrer" title="Facebook Cahyadi"
+               class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition transform hover:-translate-y-1">
+              <i class="fa-brands fa-facebook-f text-lg"></i>
+            </a>
+            <a href="https://wa.me/6283134048391" target="_blank" rel="noopener noreferrer" title="WhatsApp Cahyadi"
+               class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-emerald-400 hover:bg-emerald-600 hover:text-white transition transform hover:-translate-y-1">
+              <i class="fa-brands fa-whatsapp text-xl"></i>
+            </a>
+            <a href="mailto:cahyadiambon73@gmail.com" title="Email Cahyadi"
+               class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-amber-400 hover:bg-amber-500 hover:text-white transition transform hover:-translate-y-1">
+              <i class="fa-solid fa-envelope text-lg"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Kolom Foto Profil Kanan -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <div class="relative animate-float">
+            <!-- Bingkai Pelangi Berputar -->
+            <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full ring-rainbow p-1.5 shadow-[0_0_50px_rgba(168,85,247,0.4)]">
+              <div class="w-full h-full rounded-full overflow-hidden bg-[#0a1026] relative">
+                <!-- Ganti URL foto di bawah ini dengan foto profil Anda -->
+                <img id="profileImage" 
+                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" 
+                     alt="Foto Profil Cahyadi" 
+                     class="w-full h-full object-cover" />
+              </div>
+            </div>
+
+            <!-- Kartu Badge Kiri Atas -->
+            <div class="absolute -left-5 top-6 glass-panel px-3.5 py-2 rounded-2xl border border-cyan-400/50 flex items-center gap-2 shadow-xl">
+              <span class="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-300 flex items-center justify-center">
+                <i class="fa-solid fa-network-wired text-xs"></i>
+              </span>
+              <span class="text-xs font-extrabold text-white">TKJ Specialist</span>
+            </div>
+
+            <!-- Kartu Badge Kanan Bawah -->
+            <div class="absolute -right-5 bottom-8 glass-panel px-3.5 py-2 rounded-2xl border border-amber-400/50 flex items-center gap-2 shadow-xl">
+              <span class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center">
+                <i class="fa-solid fa-server text-xs"></i>
+              </span>
+              <span class="text-xs font-extrabold text-white">Cahyadi • IT</span>
+            </div>
+          </div>
+
+          <!-- Fitur Upload / Ganti Foto Profil Langsung -->
+          <div class="mt-6 flex flex-col items-center gap-1.5">
+            <label for="uploadPhoto" class="cursor-pointer px-4 py-2 rounded-full glass-panel border border-cyan-400/40 hover:bg-cyan-500/20 text-xs font-bold text-cyan-300 flex items-center gap-2 transition">
+              <i class="fa-solid fa-camera-rotate"></i> Upload / Ganti Foto Profil
+            </label>
+            <input type="file" id="uploadPhoto" accept="image/*" class="hidden" />
+            <p class="text-[11px] text-slate-400">Pilih foto dari HP atau laptop untuk langsung ditampilkan</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. TENTANG JURUSAN TKJ -->
+    <section id="tentang-tkj" class="max-w-6xl mx-auto px-5 py-16">
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <span class="px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-300 border border-cyan-400/30">
+          Mengenal Jurusan TKJ
+        </span>
+        <h2 class="font-display font-black text-3xl sm:text-4xl text-white">
+          Apa Itu <span class="text-rainbow">Teknik Komputer & Jaringan</span>?
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          <strong>TKJ (Teknik Komputer dan Jaringan)</strong> adalah jurusan teknologi informasi yang mempelajari seluk-beluk perangkat keras komputer, instalasi sistem operasi, perancangan topologi jaringan lokal maupun internet global, konfigurasi router & server, hingga keamanan siber.
+        </p>
+      </div>
+
+      <!-- 4 Keahlian Utama TKJ -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-panel card-interactive p-6 rounded-2xl border-t-4 border-t-cyan-400">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/25 to-blue-500/25 text-cyan-300 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-computer"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white mb-2">Perakitan & Hardware</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Merakit komponen PC & server, melakukan troubleshooting kerusakan perangkat keras, serta perawatan berkala sistem komputer.
+          </p>
+        </div>
+
+        <div class="glass-panel card-interactive p-6 rounded-2xl border-t-4 border-t-purple-500">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/25 to-indigo-500/25 text-purple-300 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-wifi"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white mb-2">Jaringan & MikroTik</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Membangun jaringan LAN, WLAN, dan Fiber Optik, konfigurasi router MikroTik/Cisco, manajemen bandwidth, dan sistem hotspot.
+          </p>
+        </div>
+
+        <div class="glass-panel card-interactive p-6 rounded-2xl border-t-4 border-t-pink-500">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500/25 to-rose-500/25 text-pink-300 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-brands fa-linux"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white mb-2">Administrasi Server</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Mengelola sistem operasi server Linux (Debian/Ubuntu), konfigurasi Web Server, DNS, DHCP, Database, hingga layanan Cloud.
+          </p>
+        </div>
+
+        <div class="glass-panel card-interactive p-6 rounded-2xl border-t-4 border-t-amber-400">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/25 to-orange-500/25 text-amber-300 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white mb-2">Keamanan Siber</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Mengamankan lalu lintas jaringan dengan Firewall, enkripsi VPN, monitoring serangan siber, dan perlindungan data perusahaan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PEKERJAAN YANG BERKAITAN DENGAN JURUSAN TKJ -->
+    <section id="pekerjaan-tkj" class="max-w-6xl mx-auto px-5 py-16">
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <span class="px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-pink-500/20 to-amber-500/20 text-pink-300 border border-pink-400/30">
+          Prospek Masa Depan Cerah
+        </span>
+        <h2 class="font-display font-black text-3xl sm:text-4xl text-white">
+          Pekerjaan yang Berkaitan dengan <span class="text-rainbow">Jurusan TKJ</span>
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base">
+          Di era transformasi digital, hampir seluruh instansi pemerintahan, perusahaan startup, bank, hingga provider internet sangat membutuhkan lulusan TKJ. Berikut adalah deretan karier menjanjikan di bidang TKJ:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Karier 1 -->
+        <div class="glass-panel card-interactive p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-13 h-13 p-3.5 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-xl shadow-lg shadow-cyan-500/30">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">Karier Utama</span>
+            </div>
+            <h3 class="font-display font-extrabold text-xl text-white mb-2">Network Engineer</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Bertanggung jawab merancang, menginstalasi, dan menjaga stabilitas jaringan komputer (LAN/WAN) pada perusahaan maupun penyedia layanan internet (ISP) agar koneksi selalu cepat tanpa putus.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-white/10 flex flex-wrap gap-2 text-[11px] font-semibold text-cyan-300">
+            <span class="px-2.5 py-1 rounded-md bg-cyan-500/10">MikroTik</span>
+            <span class="px-2.5 py-1 rounded-md bg-cyan-500/10">Cisco</span>
+            <span class="px-2.5 py-1 rounded-md bg-cyan-500/10">Routing & Switching</span>
+          </div>
+        </div>
+
+        <!-- Karier 2 -->
+        <div class="glass-panel card-interactive p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-13 h-13 p-3.5 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white text-xl shadow-lg shadow-purple-500/30">
+                <i class="fa-solid fa-server"></i>
+              </div>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/30">Sangat Dibutuhkan</span>
+            </div>
+            <h3 class="font-display font-extrabold text-xl text-white mb-2">System Administrator (SysAdmin)</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Mengelola server perusahaan, mengatur hak akses pengguna, melakukan backup database otomatis, serta memastikan website dan aplikasi kantor berjalan lancar 24 jam nonstop.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-white/10 flex flex-wrap gap-2 text-[11px] font-semibold text-purple-300">
+            <span class="px-2.5 py-1 rounded-md bg-purple-500/10">Linux Server</span>
+            <span class="px-2.5 py-1 rounded-md bg-purple-500/10">Virtualisasi</span>
+            <span class="px-2.5 py-1 rounded-md bg-purple-500/10">Cloud Hosting</span>
+          </div>
+        </div>
+
+        <!-- Karier 3 -->
+        <div class="glass-panel card-interactive p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-13 h-13 p-3.5 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 text-white text-xl shadow-lg shadow-pink-500/30">
+                <i class="fa-solid fa-user-secret"></i>
+              </div>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-400/30">Gaji Tinggi</span>
+            </div>
+            <h3 class="font-display font-extrabold text-xl text-white mb-2">Cyber Security Specialist</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Melindungi sistem informasi dan jaringan dari peretasan (hacking), malware, serta kebocoran data sensitif dengan memasang sistem pertahanan firewall dan audit keamanan berkala.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-white/10 flex flex-wrap gap-2 text-[11px] font-semibold text-pink-300">
+            <span class="px-2.5 py-1 rounded-md bg-pink-500/10">Firewall</span>
+            <span class="px-2.5 py-1 rounded-md bg-pink-500/10">Penetration Testing</span>
+            <span class="px-2.5 py-1 rounded-md bg-pink-500/10">Network Defense</span>
+          </div>
+        </div>
+
+        <!-- Karier 4 -->
+        <div class="glass-panel card-interactive p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-13 h-13 p-3.5 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white text-xl shadow-lg shadow-amber-500/30">
+                <i class="fa-solid fa-headset"></i>
+              </div>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30">Semua Perusahaan</span>
+            </div>
+            <h3 class="font-display font-extrabold text-xl text-white mb-2">IT Support & Helpdesk</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Menangani troubleshooting komputer, instalasi software dan sistem operasi, perbaikan koneksi Wi-Fi/LAN kantor, serta membantu menyelesaikan kendala teknis perangkat karyawan.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-white/10 flex flex-wrap gap-2 text-[11px] font-semibold text-amber-300">
+            <span class="px-2.5 py-1 rounded-md bg-amber-500/10">Hardware</span>
+            <span class="px-2.5 py-1 rounded-md bg-amber-500/10">Windows & Linux</span>
+            <span class="px-2.5 py-1 rounded-md bg-amber-500/10">Troubleshooting</span>
+          </div>
+        </div>
+
+        <!-- Karier 5 -->
+        <div class="glass-panel card-interactive p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-13 h-13 p-3.5 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white text-xl shadow-lg shadow-emerald-500/30">
+                <i class="fa-solid fa-tower-broadcast"></i>
+              </div>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">Telekomunikasi</span>
+            </div>
+            <h3 class="font-display font-extrabold text-xl text-white mb-2">Teknisi Fiber Optik & ISP</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Melakukan penyambungan kabel serat optik (splicing), instalasi jaringan internet FTTH ke rumah maupun gedung, pengukuran redaman sinyal optik, dan pemeliharaan jaringan ISP.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-white/10 flex flex-wrap gap-2 text-[11px] font-semibold text-emerald-300">
+            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10">FTTH</span>
+            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10">Fusion Splicer</span>
+            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10">OTDR</span>
+          </div>
+        </div>
+
+        <!-- Karier 6 -->
+        <div class="glass-panel card-interactive p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-13 h-13 p-3.5 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white text-xl shadow-lg shadow-sky-500/30">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">Teknologi Modern</span>
+            </div>
+            <h3 class="font-display font-extrabold text-xl text-white mb-2">Cloud & DevOps Engineer</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Membangun infrastruktur server modern berbasis Cloud (AWS, Google Cloud, Azure) dan mengelola otomatisasi server agar aplikasi digital dapat diakses jutaan pengguna dengan cepat.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-white/10 flex flex-wrap gap-2 text-[11px] font-semibold text-sky-300">
+            <span class="px-2.5 py-1 rounded-md bg-sky-500/10">Cloud Server</span>
+            <span class="px-2.5 py-1 rounded-md bg-sky-500/10">Docker</span>
+            <span class="px-2.5 py-1 rounded-md bg-sky-500/10">Automation</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. PROFIL & LINK SOSIAL MEDIA CAHYADI -->
+    <section id="profil-sosmed" class="max-w-6xl mx-auto px-5 py-16 pb-24">
+      <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-white/15 relative overflow-hidden shadow-2xl">
+        <!-- Efek Cahaya Dekoratif -->
+        <div class="absolute -top-28 -right-28 w-72 h-72 bg-gradient-to-br from-cyan-500/30 via-fuchsia-500/30 to-amber-500/30 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
+          <span class="px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30">
+            Profil & Kontak Langsung
+          </span>
+          <h2 class="font-display font-black text-3xl sm:text-4xl text-white">
+            Terhubung dengan <span class="text-rainbow">Cahyadi</span>
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base">
+            Ikuti akun media sosial saya atau hubungi langsung melalui Email dan WhatsApp untuk diskusi teknologi, jaringan komputer, maupun kerja sama!
+          </p>
+        </div>
+
+        <!-- Grid 6 Kartu Kontak & Media Sosial -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          
+          <!-- 1. Instagram -->
+          <a href="https://www.instagram.com/__cahyadi_?igsi=MTZtNjcwbnRjd3l6cQ==" target="_blank" rel="noopener noreferrer"
+             class="group glass-panel p-5 rounded-2xl border border-white/10 hover:border-pink-500/70 transition flex items-center gap-4">
+            <div class="w-14 h-14 min-w-[3.5rem] rounded-2xl bg-gradient-to-tr from-amber-500 via-pink-500 to-purple-600 flex items-center justify-center text-white text-2xl shadow-lg group-hover:scale-110 transition">
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+            <div class="overflow-hidden">
+              <span class="text-xs font-bold text-pink-400">Instagram</span>
+              <h4 class="font-display font-bold text-lg text-white truncate">@__cahyadi_</h4>
+              <p class="text-xs text-slate-400 group-hover:text-pink-200 transition">Buka Profil Instagram &rarr;</p>
+            </div>
+          </a>
+
+          <!-- 2. TikTok -->
+          <a href="https://www.tiktok.com/@bonreign_?_r=1&_t=ZS-99HAkJ3gCFr" target="_blank" rel="noopener noreferrer"
+             class="group glass-panel p-5 rounded-2xl border border-white/10 hover:border-cyan-400/70 transition flex items-center gap-4">
+            <div class="w-14 h-14 min-w-[3.5rem] rounded-2xl bg-gradient-to-br from-slate-900 via-cyan-950 to-pink-950 border border-cyan-400/50 flex items-center justify-center text-cyan-300 text-2xl shadow-lg group-hover:scale-110 transition">
+              <i class="fa-brands fa-tiktok"></i>
+            </div>
+            <div class="overflow-hidden">
+              <span class="text-xs font-bold text-cyan-400">TikTok</span>
+              <h4 class="font-display font-bold text-lg text-white truncate">@bonreign_</h4>
+              <p class="text-xs text-slate-400 group-hover:text-cyan-200 transition">Tonton Konten TikTok &rarr;</p>
+            </div>
+          </a>
+
+          <!-- 3. YouTube -->
+          <a href="https://youtube.com/@cahyadi-n7z?si=lYSiEZ0knD2AKHR8" target="_blank" rel="noopener noreferrer"
+             class="group glass-panel p-5 rounded-2xl border border-white/10 hover:border-red-500/70 transition flex items-center gap-4">
+            <div class="w-14 h-14 min-w-[3.5rem] rounded-2xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center text-white text-2xl shadow-lg group-hover:scale-110 transition">
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+            <div class="overflow-hidden">
+              <span class="text-xs font-bold text-red-400">YouTube</span>
+              <h4 class="font-display font-bold text-lg text-white truncate">@cahyadi-n7z</h4>
+              <p class="text-xs text-slate-400 group-hover:text-red-200 transition">Kunjungi Channel YouTube &rarr;</p>
+            </div>
+          </a>
+
+          <!-- 4. Facebook -->
+          <a href="https://www.facebook.com/share/1FctgL7zww/" target="_blank" rel="noopener noreferrer"
+             class="group glass-panel p-5 rounded-2xl border border-white/10 hover:border-blue-500/70 transition flex items-center gap-4">
+            <div class="w-14 h-14 min-w-[3.5rem] rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white text-2xl shadow-lg group-hover:scale-110 transition">
+              <i class="fa-brands fa-facebook-f"></i>
+            </div>
+            <div class="overflow-hidden">
+              <span class="text-xs font-bold text-blue-400">Facebook</span>
+              <h4 class="font-display font-bold text-lg text-white truncate">Cahyadi</h4>
+              <p class="text-xs text-slate-400 group-hover:text-blue-200 transition">Lihat Profil Facebook &rarr;</p>
+            </div>
+          </a>
+
+          <!-- 5. Email -->
+          <div class="group glass-panel p-5 rounded-2xl border border-white/10 hover:border-amber-400/70 transition flex items-center justify-between gap-2">
+            <a href="mailto:cahyadiambon73@gmail.com" class="flex items-center gap-4 overflow-hidden">
+              <div class="w-14 h-14 min-w-[3.5rem] rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-2xl shadow-lg group-hover:scale-110 transition">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="overflow-hidden">
+                <span class="text-xs font-bold text-amber-400">Email Resmi</span>
+                <h4 class="font-bold text-sm text-white truncate">cahyadiambon73@gmail.com</h4>
+                <p class="text-xs text-slate-400">Kirim Email Langsung</p>
+              </div>
+            </a>
+            <button onclick="copyText('cahyadiambon73@gmail.com', 'Alamat Email')" title="Salin Email"
+                    class="p-2.5 rounded-xl bg-white/5 hover:bg-amber-500/20 text-amber-300 transition shrink-0">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+
+          <!-- 6. Nomor Telepon / WhatsApp -->
+          <div class="group glass-panel p-5 rounded-2xl border border-white/10 hover:border-emerald-400/70 transition flex items-center justify-between gap-2">
+            <a href="https://wa.me/6283134048391" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 overflow-hidden">
+              <div class="w-14 h-14 min-w-[3.5rem] rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-2xl shadow-lg group-hover:scale-110 transition">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div class="overflow-hidden">
+                <span class="text-xs font-bold text-emerald-400">Telepon / WhatsApp</span>
+                <h4 class="font-display font-bold text-lg text-white truncate">0831-3404-8391</h4>
+                <p class="text-xs text-slate-400">Hubungi via WhatsApp</p>
+              </div>
+            </a>
+            <button onclick="copyText('083134048391', 'Nomor Telepon')" title="Salin Nomor Telepon"
+                    class="p-2.5 rounded-xl bg-white/5 hover:bg-emerald-500/20 text-emerald-300 transition shrink-0">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Notifikasi Toast saat Salin Kontak / Ganti Foto -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 glass-panel border border-cyan-400/60 px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toastMsg" class="text-sm font-semibold text-white">Berhasil!</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 border-t border-white/10 py-8 text-center text-sm text-slate-400">
+    <p>Dibuat dengan penuh semangat oleh <span class="font-bold text-rainbow">Cahyadi</span> • Teknik Komputer & Jaringan (TKJ) © 2026</p>
+  </footer>
+
+  <!-- JAVASCRIPT INTERAKTIF -->
+  <script>
+    // 1. Efek Ketik Otomatis (Typing Animation)
+    const texts = [
+      "Teknik Komputer & Jaringan (TKJ)",
+      "Network & Server Enthusiast",
+      "MikroTik, Cisco & Linux Explorer",
+      "IT Support & Cyber Security Learner"
+    ];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingEl = document.getElementById("typingText");
+
+    function typeEffect() {
+      const currentText = texts[textIndex];
+      if (isDeleting) {
+        typingEl.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingEl.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let delay = isDeleting ? 40 : 80;
+      if (!isDeleting && charIndex === currentText.length) {
+        delay = 1800;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        delay = 350;
+      }
+      setTimeout(typeEffect, delay);
+    }
+    typeEffect();
+
+    // 2. Fitur Upload & Preview Foto Profil Langsung
+    const uploadPhoto = document.getElementById("uploadPhoto");
+    const profileImage = document.getElementById("profileImage");
+
+    uploadPhoto.addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          profileImage.src = event.target.result;
+          showToast("Foto profil Cahyadi berhasil diperbarui!");
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // 3. Fungsi Salin Email & Nomor Telepon
+    function copyText(value, label) {
+      navigator.clipboard.writeText(value).then(() => {
+        showToast(`${label} (${value}) berhasil disalin!`);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toastMsg");
+      toastMsg.textContent = msg;
+      toast.classList.remove("translate-y-24", "opacity-0");
+      setTimeout(() => {
+        toast.classList.add("translate-y-24", "opacity-0");
+      }, 3000);
+    }
+
+    // 4. Animasi Partikel Jaringan Komputer (Network Canvas)
+    const canvas = document.getElementById("networkCanvas");
+    const ctx = canvas.getContext("2d");
+    let nodes = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const palette = ["#22d3ee", "#a855f7", "#ec4899", "#fbbf24"];
+    class Node {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.65;
+        this.vy = (Math.random() - 0.5) * 0.65;
+        this.r = Math.random() * 2.2 + 1;
+        this.color = palette[Math.floor(Math.random() * palette.length)];
+      }
+      move() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 60; i++) nodes.push(new Node());
+
+    function renderNetwork() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < nodes.length; i++) {
+        nodes[i].move();
+        nodes[i].draw();
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 135) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - distance / 135) * 0.45})`;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(renderNetwork);
+    }
+    renderNetwork();
+  </script>
+</body>
+</html>
